@@ -1,8 +1,10 @@
 import { Router } from "express";
-import parcelsRoutes from "./api/parcels.routes";
+import bikersRoutes from "./api/bikers.routes";
+import sendersRoutes from "./api/senders.routes";
 
 const routes = Router();
 
-routes.use("/users", parcelsRoutes);
+routes.use("/bikers", bikersRoutes);
+routes.use("/senders", sendersRoutes);
 
 export default routes;

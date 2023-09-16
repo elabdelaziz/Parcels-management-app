@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export const create = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response): Promise<void> => {
   try {
     // var token = jwt.sign({ user: user }, config.jwToken as unknown as string);
     // res.json({
