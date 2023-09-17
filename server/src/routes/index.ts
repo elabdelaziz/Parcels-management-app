@@ -1,10 +1,8 @@
 import { Router } from "express";
-import bikersRoutes from "./api/bikers.routes";
-import sendersRoutes from "./api/senders.routes";
+import userRoutes from "./api/user.routes";
 
 const routes = Router();
 
-routes.use("/bikers", bikersRoutes);
-routes.use("/senders", sendersRoutes);
+routes.use("/user", userRoutes);
 
 export default routes;

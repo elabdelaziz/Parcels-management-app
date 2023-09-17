@@ -1,90 +1,120 @@
-export let senders = {
-  sarah: {
+import config from "../config";
+import bcrypt from "bcrypt";
+
+export let users = [
+  {
     id: "sarahedo",
     name: "Sarah Edo",
-    parcelsWritten: [
+    parcels: [
       "8xf0y6ziyjabvozdd253nd",
       "6ni6ok3ym7mf1p33lnez",
       "8xf0y6ziyjabvozdd253nb",
     ],
+    password: "",
+    type: "sender",
   },
-  tyleredo: {
+  {
     id: "tyleredo",
     name: "Tyler edo",
-    parcelsWritten: ["8xf0y6ziyjabvozdd253dd", "8xf0y6ziyjabvozdd253ss"],
+    parcels: ["8xf0y6ziyjabvozdd253dd", "8xf0y6ziyjabvozdd253ss"],
+    password: "",
+    type: "sender",
   },
-  johndoe: {
+  {
     id: "johndoe",
     name: "John Doe",
-    parcelsWritten: [],
+    parcels: [],
+    password: "",
+    type: "sender",
   },
-  bensmith: {
+  {
     id: "bensmith",
     name: "Ben Smith",
-    parcelsWritten: [],
+    parcels: [],
+    password: "",
+    type: "sender",
   },
-  drake: {
+  {
     id: "drake",
     name: "Drake",
-    parcelsWritten: [],
+    parcels: [],
+    password: "",
+    type: "sender",
   },
-};
-
-export let bikers = {
-  jackdoe: {
+  {
     id: "jackdoe",
     name: "Jack Doe",
     parcels: ["8xf0y6ziyjabvozdd253nd", "6ni6ok3ym7mf1p33lnez"],
+    password: "",
+    type: "biker",
   },
-  kendrickdoe: {
+  {
     id: "kendrickdoe",
     name: "Kendrick Doe",
     parcels: ["8xf0y6ziyjabvozdd253nb", "8xf0y6ziyjabvozdd253dd"],
+    password: "",
+    type: "biker",
   },
-  brndondoe: {
+  {
     id: "brandondoe",
     name: "Brandon Doe",
     parcels: ["8xf0y6ziyjabvozdd253ss"],
+    password: "",
+    type: "biker",
   },
-  travis: {
+  {
     id: "travis",
     name: "Travis",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-  ali: {
+  {
     id: "ali",
     name: "Ali",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-  bob: {
+  {
     id: "bob",
     name: "Bob",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-  awad: {
+  {
     id: "awad",
     name: "Awad",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-  sayed: {
+  {
     id: "sayed",
     name: "Sayed",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-  fathy: {
+  {
     id: "fathy",
     name: "Fathy",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-  nina: {
+  {
     id: "nina",
     name: "Nina",
     parcels: [],
+    password: "",
+    type: "biker",
   },
-};
+];
 
-export let parcels = {
-  "8xf0y6ziyjabvozdd253nd": {
+export let parcels = [
+  {
     id: "8xf0y6ziyjabvozdd253nd",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -95,7 +125,7 @@ export let parcels = {
     deliveryTimestamp: null,
     sender: "sarahedo",
   },
-  "6ni6ok3ym7mf1p33lnez": {
+  {
     id: "6ni6ok3ym7mf1p33lnez",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -106,7 +136,7 @@ export let parcels = {
     deliveryTimestamp: null,
     sender: "sarahedo",
   },
-  "8xf0y6ziyjabvozdd253nb": {
+  {
     id: "8xf0y6ziyjabvozdd253nb",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -117,7 +147,7 @@ export let parcels = {
     deliveryTimestamp: null,
     sender: "sarahedo",
   },
-  "8xf0y6ziyjabvozdd253dd": {
+  {
     id: "8xf0y6ziyjabvozdd253dd",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -128,7 +158,7 @@ export let parcels = {
     deliveryTimestamp: null,
     sender: "sarahedo",
   },
-  "8xf0y6ziyjabvozdd253ss": {
+  {
     id: "8xf0y6ziyjabvozdd253ss",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -139,4 +169,25 @@ export let parcels = {
     deliveryTimestamp: null,
     sender: "sarahedo",
   },
+];
+
+const mockPassword = config.generalPassword as string;
+
+// assigning and hashing passwords
+const hashPass = (pass: string) => {
+  const salt = parseInt(config.salt as string, 10);
+  return bcrypt.hashSync(`${pass}${config.pepper}`, salt);
+};
+
+const assignMockPasswords = async () => {
+  // Assign and hash passwords for senders
+  for (const user of users) {
+    user.password = hashPass(mockPassword);
+  }
+};
+
+assignMockPasswords();
+
+export const getUser = (id: string) => {
+  return users.find((user) => user.id === id);
 };
