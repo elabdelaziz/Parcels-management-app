@@ -4,7 +4,9 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "../styles/Input.module.css";
 import { useForm } from "react-hook-form";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { loginUser } from "@/models/userModels";
+import { getPendingParcels, loginUser } from "@/models/userModels";
+import { useRouter } from "next/navigation";
+import useGetPendingParcels from "@/hooks/queries/useGetPendingParcels";
 
 type LoginFormInput = {
   username: string;
@@ -15,11 +17,20 @@ const LoginModal = ({
   loginMode,
   setLoginMode,
 }: {
-  setLoginMode: Dispatch<SetStateAction<string | null>>;
-  loginMode: string | null;
+  setLoginMode: Dispatch<SetStateAction<boolean>>;
+  loginMode: boolean;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useLocalStorage("token", null);
+  const [, setToken] = useLocalStorage("token", null);
+  const [userData, setUserData] = useLocalStorage("userData", null);
+  const [pendingParcels, setPendingParcels] = useLocalStorage(
+    "pendingParcels",
+    null
+  );
+  // const { data: parcels } = useGetPendingParcels(userData?.type);
+  // console.log(parcels);
+
+  const router = useRouter();
 
   const {
     register,
@@ -30,8 +41,15 @@ const LoginModal = ({
   const onSubmit = async (data: LoginFormInput) => {
     try {
       const response = await loginUser(data);
-      const userToken: string = response.data.token;
+      const userToken = response.data.data.token;
       setToken(userToken);
+      setUserData(response.data.data);
+
+      if (userData.type === "biker") {
+        const response = await getPendingParcels();
+        setPendingParcels(response.data.parcels);
+      }
+      router.push("/dashboard");
     } catch (error) {
       throw new Error("cannot login user");
     }
@@ -46,7 +64,7 @@ const LoginModal = ({
   return (
     <>
       <div
-        onClick={() => setLoginMode(null)}
+        onClick={() => setLoginMode(false)}
         className="absolute top-0 z-[3] overlay w-[100vw] h-[100vh] bg-black bg-opacity-[0.5]"
       ></div>
       <div className="absolute top-0 flex items-center justify-center w-[100vw] h-[100vh]">

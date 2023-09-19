@@ -118,23 +118,25 @@ export let parcels = [
     id: "8xf0y6ziyjabvozdd253nd",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "123 Main St, Cologne",
-    dropoffAddress: "456 Elm St, Cologne",
-    status: "Pending",
+    pickupAddress: "address 1",
+    dropoffAddress: "address 2",
+    status: "delivered",
     pickupTimestamp: null,
     deliveryTimestamp: null,
     sender: "sarahedo",
+    biker: "jackdoe",
   },
   {
     id: "6ni6ok3ym7mf1p33lnez",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "123 Main St, Cologne",
-    dropoffAddress: "456 Elm St, Cologne",
-    status: "Pending",
+    pickupAddress: "address 3",
+    dropoffAddress: "address 4",
+    status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
     sender: "sarahedo",
+    biker: "jackdoe",
   },
   {
     id: "8xf0y6ziyjabvozdd253nb",
@@ -142,10 +144,11 @@ export let parcels = [
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     pickupAddress: "123 Main St, Cologne",
     dropoffAddress: "456 Elm St, Cologne",
-    status: "Pending",
+    status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
     sender: "sarahedo",
+    biker: "kendrickdoe",
   },
   {
     id: "8xf0y6ziyjabvozdd253dd",
@@ -153,10 +156,11 @@ export let parcels = [
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     pickupAddress: "123 Main St, Cologne",
     dropoffAddress: "456 Elm St, Cologne",
-    status: "Pending",
+    status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
     sender: "sarahedo",
+    biker: "kendrickdoe",
   },
   {
     id: "8xf0y6ziyjabvozdd253ss",
@@ -164,10 +168,35 @@ export let parcels = [
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     pickupAddress: "123 Main St, Cologne",
     dropoffAddress: "456 Elm St, Cologne",
-    status: "Pending",
+    status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
     sender: "sarahedo",
+    biker: "brandondoe",
+  },
+  {
+    id: "8xf0y6ziyjabvozdd253pp",
+    description:
+      "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    pickupAddress: "123 Main St, Cologne",
+    dropoffAddress: "456 Elm St, Cologne",
+    status: "pending",
+    pickupTimestamp: null,
+    deliveryTimestamp: null,
+    sender: "sarahedo",
+    biker: null,
+  },
+  {
+    id: "8xf0y6ziyjabvozdd253yy",
+    description:
+      "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    pickupAddress: "123 Main St, Cologne",
+    dropoffAddress: "456 Elm St, Cologne",
+    status: "pending",
+    pickupTimestamp: null,
+    deliveryTimestamp: null,
+    sender: "sarahedo",
+    biker: null,
   },
 ];
 
@@ -189,5 +218,37 @@ const assignMockPasswords = async () => {
 assignMockPasswords();
 
 export const getUser = (id: string) => {
-  return users.find((user) => user.id === id);
+  const user = users.find((user) => user.id === id);
+
+  if (!user) {
+    return null; // Return null if the user is not found
+  }
+
+  return {
+    ...user,
+    // parcels: userParcels,
+  };
+};
+
+export const getParcels = (id: string) => {
+  const user = getUser(id);
+  if (!user) {
+    return null;
+  }
+  // Retrieve parcels related to the user
+  const userParcels = parcels.filter(
+    (parcel) => parcel.sender === id || parcel.biker === id
+  );
+
+  // filter out pending parcels if the user is a biker
+  if (user.type === "biker") {
+    userParcels.filter((parcel) => parcel.status !== "pending");
+  }
+  return userParcels;
+};
+
+export const getPendingParcels = () => {
+  const pending = parcels.filter((parcel) => parcel.status === "pending");
+
+  return pending;
 };
