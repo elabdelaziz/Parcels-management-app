@@ -1,20 +1,27 @@
-import { getParcels } from "@/models/userModels";
+import { getBikerParcels } from "@/models/bikerModels";
+import { getSenderParcels } from "@/models/senderModels";
+import { User } from "@/types/dataTypes";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetParcels = (id: string) => {
+const useGetParcels = (userData: User) => {
   return useQuery(
-    ["user-parcels", id],
+    ["user-parcels", userData?.id],
     async () => {
-      const data = await getParcels(id);
+      let res;
 
-      if (!data) {
-        return null;
+      if (userData.type === "biker") {
+        res = await getBikerParcels(userData?.id);
+      } else if (userData?.type === "sender") {
+        res = await getSenderParcels(userData?.id);
       }
-      return data.data.parcels;
+
+      const parcels = res.data.parcels;
+
+      return parcels;
     },
     {
       staleTime: 1000 * 60 * 100,
-      enabled: id?.length > 0,
+      enabled: userData?.id?.length > 0,
     }
   );
 };

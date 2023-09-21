@@ -10,8 +10,12 @@ export interface Parcel {
   description: string;
   pickupAddress: string;
   dropoffAddress: string;
-  parcels: {}[];
   biker: string;
   status: string;
   sender: string;
+}
+export interface ParcelGroup {
+  picked: Parcel[];
+  pending: Parcel[];
+  delivered: Parcel[];
 }

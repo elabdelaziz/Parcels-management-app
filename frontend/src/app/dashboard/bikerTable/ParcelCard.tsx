@@ -1,3 +1,4 @@
+import Toast from "@/components/Toast";
 import { Parcel } from "@/types/dataTypes";
 import { useEffect, useRef, useState } from "react";
 
@@ -35,16 +36,18 @@ export default function ParcelCard({
   return (
     <div
       key={parcel.id}
-      className="relative group bg-gray-900 py-4 sm:h-fit sm:min-h-[14rem] px-4 flex flex-col justify-center space-y-2 items-center cursor-pointer rounded-md hover:bg-gray-900/80 hover:smooth-hover"
+      className="relative group bg-gray-900 py-4 sm:h-fit min-h-[14rem] px-4 flex flex-col justify-between space-y-2 items-center rounded-md hover:bg-gray-900/80 hover:smooth-hover"
     >
       {DropdownOpen && (
         <div className="absolute inset-0 bg-black z-20 opacity-[0.9] hover:opacity-100 transition-opacity duration-600"></div>
       )}
-      <p className="text-white/70 inline-flex self-start text-xs">
+      <p className="text-white/70 mt-[0.5rem] inline-flex self-start text-xs">
         Sent By:{" "}
         <span className="text-white bold ml-[5px]">{parcel.sender}</span>
       </p>
-      <p className="flex text-white/50">Destination: {parcel.dropoffAddress}</p>
+      <p className="flex !m-auto text-white/50">
+        Destination: {parcel.dropoffAddress}
+      </p>
       <div className="absolute z-[30] !mt-0 top-[1rem] mt-0 right-[1rem]">
         <div className="relative" ref={dropdownRef}>
           <button
@@ -71,7 +74,7 @@ export default function ParcelCard({
           <div
             className={`${
               DropdownOpen ? "block" : "hidden"
-            } z-10 bg-white absolute right-0 top-[3rem] divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+            } z-10 bg-white absolute right-0 top-[3rem] divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700`}
           >
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
               {options.map((option) => (

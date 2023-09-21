@@ -1,21 +1,11 @@
 import { Parcel, User } from "@/types/dataTypes";
 import Content from "./Content";
 import { useState } from "react";
-import useGetPendingParcels from "@/hooks/queries/useGetPendingParcels";
 import Nav from "./Nav";
 import LogoutIcn from "./LogoutIcn";
 
-export default function BikerTable({
-  parcels,
-  userData,
-}: {
-  parcels: Parcel[];
-  userData: User;
-}) {
+export default function BikerTable({ parcels }: { parcels: Parcel[] }) {
   const [activeComponent, setActiveComponent] = useState("pending");
-  const { data: pendingParcels } = useGetPendingParcels(userData?.type);
-
-  console.log(pendingParcels);
 
   const handleNavClick = (component: string) => {
     setActiveComponent(component);
@@ -30,11 +20,7 @@ export default function BikerTable({
           />
           <LogoutIcn />
         </div>
-        <Content
-          activeComponent={activeComponent}
-          pendingParcels={pendingParcels}
-          parcels={parcels}
-        />
+        <Content activeComponent={activeComponent} parcels={parcels} />
       </div>
     </div>
   );

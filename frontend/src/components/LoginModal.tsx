@@ -27,8 +27,6 @@ const LoginModal = ({
     "pendingParcels",
     null
   );
-  // const { data: parcels } = useGetPendingParcels(userData?.type);
-  // console.log(parcels);
 
   const router = useRouter();
 
@@ -44,11 +42,6 @@ const LoginModal = ({
       const userToken = response.data.data.token;
       setToken(userToken);
       setUserData(response.data.data);
-
-      if (userData.type === "biker") {
-        const response = await getPendingParcels();
-        setPendingParcels(response.data.parcels);
-      }
       router.push("/dashboard");
     } catch (error) {
       throw new Error("cannot login user");

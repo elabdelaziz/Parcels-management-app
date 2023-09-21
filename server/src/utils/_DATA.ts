@@ -247,6 +247,28 @@ export const getParcels = (id: string) => {
   return userParcels;
 };
 
+export const getSenderParcels = (id: string) => {
+  const user = getUser(id);
+  if (!user) {
+    return null;
+  }
+  // Retrieve parcels related to the user
+  const userParcels = parcels.filter((parcel) => parcel.sender === id);
+  return userParcels;
+};
+
+export const getBikerParcels = (id: string) => {
+  const user = getUser(id);
+  if (!user) {
+    return null;
+  }
+  // Retrieve parcels related to the user
+  const userParcels = parcels.filter(
+    (parcel) => parcel.biker === id || parcel.status === "pending"
+  );
+  return userParcels;
+};
+
 export const getPendingParcels = () => {
   const pending = parcels.filter((parcel) => parcel.status === "pending");
 

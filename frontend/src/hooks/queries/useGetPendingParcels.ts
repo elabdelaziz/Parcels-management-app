@@ -6,9 +6,6 @@ const useGetPendingParcels = (type: string) => {
     ["pending-parcels", type],
     async () => {
       const res = await getPendingParcels();
-
-      console.log(res);
-
       if (!res) {
         return null;
       }

@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
 import config from "../config";
-import { getUser } from "../utils/_DATA";
 import jwt from "jsonwebtoken";
 import UserStore from "../models/user";
 

@@ -1,6 +1,11 @@
 import bcrypt from "bcrypt";
 import config from "../config";
-import { getParcels, getPendingParcels, getUser } from "../utils/_DATA";
+import {
+  getBikerParcels,
+  getParcels,
+  getPendingParcels,
+  getUser,
+} from "../utils/_DATA";
 
 class UserStore {
   async getPendingParcels() {
@@ -29,6 +34,7 @@ class UserStore {
       );
     }
   }
+
   async auth(username: string, password: string) {
     try {
       const user = getUser(username);
