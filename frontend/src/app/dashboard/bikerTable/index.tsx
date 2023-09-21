@@ -1,8 +1,8 @@
-import { Parcel, User } from "@/types/dataTypes";
+import { Parcel } from "@/types/dataTypes";
 import Content from "./Content";
 import { useState } from "react";
 import Nav from "./Nav";
-import LogoutIcn from "./LogoutIcn";
+import Logout from "@/components/Logout";
 
 export default function BikerTable({ parcels }: { parcels: Parcel[] }) {
   const [activeComponent, setActiveComponent] = useState("pending");
@@ -18,7 +18,7 @@ export default function BikerTable({ parcels }: { parcels: Parcel[] }) {
             handleNavClick={handleNavClick}
             activeComponent={activeComponent}
           />
-          <LogoutIcn />
+          <Logout />
         </div>
         <Content activeComponent={activeComponent} parcels={parcels} />
       </div>

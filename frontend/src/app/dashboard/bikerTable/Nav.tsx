@@ -1,6 +1,7 @@
 import { MdPendingActions } from "react-icons/md";
 import { GoPackage } from "react-icons/go";
 import { BsFillSendCheckFill } from "react-icons/bs";
+import Link from "next/link";
 
 export default function Nav({
   activeComponent,
@@ -10,7 +11,7 @@ export default function Nav({
   handleNavClick: (component: string) => void;
 }) {
   return (
-    <nav className="">
+    <nav className="flex flex-col justify-between h-full">
       <ul className="flex items-center flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2 [&>li]:cursor-pointer">
         <li
           className={`${

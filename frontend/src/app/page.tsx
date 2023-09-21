@@ -1,9 +1,9 @@
-import AppLayout from "@/components/AppLayout";
+import LandingPage from "@/components/AppLayout";
 
 export default function Home() {
   return (
     <main>
-      <AppLayout />
+      <LandingPage />
     </main>
   );
 }

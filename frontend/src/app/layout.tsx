@@ -1,4 +1,3 @@
-import Nav from "@/components/Nav";
 import "../styles/globals.css";
 import { Provider } from "@/utils/Provider";
 
@@ -9,10 +8,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        {/* <Nav /> */}
-        <Provider>{children}</Provider>
-      </body>
+      <Provider>
+        <body>{children}</body>
+      </Provider>
     </html>
   );
 }

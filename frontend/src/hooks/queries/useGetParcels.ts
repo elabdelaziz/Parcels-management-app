@@ -8,15 +8,12 @@ const useGetParcels = (userData: User) => {
     ["user-parcels", userData?.id],
     async () => {
       let res;
-
       if (userData.type === "biker") {
         res = await getBikerParcels(userData?.id);
       } else if (userData?.type === "sender") {
         res = await getSenderParcels(userData?.id);
       }
-
       const parcels = res.data.parcels;
-
       return parcels;
     },
     {

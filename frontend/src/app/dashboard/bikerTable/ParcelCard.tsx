@@ -1,18 +1,20 @@
-import Toast from "@/components/Toast";
+import { useToast } from "@/hooks/useToast";
 import { Parcel } from "@/types/dataTypes";
 import { useEffect, useRef, useState } from "react";
 
 export default function ParcelCard({
   parcel,
   options,
-  handleOptionSelection,
+  handleUpdateParcel,
 }: {
   parcel: Parcel;
   options: string[];
-  handleOptionSelection: (option: string) => void;
+  handleUpdateParcel: (data: { status: string; id: string }) => void;
 }) {
   const [DropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const { showToast, toastComponent } = useToast();
 
   // listen for clicks outside of the dropdown
   useEffect(() => {
@@ -32,6 +34,12 @@ export default function ParcelCard({
       document.removeEventListener("click", handleClickOutside);
     };
   }, [DropdownOpen]);
+
+  const handleClick = (status: string, id: string) => {
+    handleUpdateParcel({ status, id });
+    setDropdownOpen(false);
+    showToast("Item moved successfully.");
+  };
 
   return (
     <div
@@ -78,19 +86,20 @@ export default function ParcelCard({
           >
             <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
               {options.map((option) => (
-                <li onClick={() => handleOptionSelection(option)} key={option}>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                <li key={option}>
+                  <button
+                    onClick={() => handleClick(option, parcel.id)}
+                    className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
                     {option}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
         </div>
       </div>
+      {toastComponent}
     </div>
   );
 }

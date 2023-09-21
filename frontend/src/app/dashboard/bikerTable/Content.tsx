@@ -1,5 +1,6 @@
 import { Parcel } from "@/types/dataTypes";
 import ParcelCard from "./ParcelCard";
+import { updateParcel } from "@/models/bikerModels";
 
 export default function Content({
   activeComponent,
@@ -9,9 +10,12 @@ export default function Content({
   parcels: Parcel[];
 }) {
   const dropDownList = ["pending", "picked", "delivered"];
-  console.log(parcels);
-  const handleOptionSelection = (option: string) => {
-    // TODO: handle option selection
+  const handleUpdateParcel = async (data: { status: string; id: string }) => {
+    try {
+      await updateParcel(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex-1 px-2 sm:px-0">
@@ -28,7 +32,7 @@ export default function Content({
               key={parcel.id}
               parcel={parcel}
               options={dropDownList}
-              handleOptionSelection={handleOptionSelection}
+              handleUpdateParcel={handleUpdateParcel}
             />
           ))}
       </div>

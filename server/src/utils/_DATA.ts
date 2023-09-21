@@ -241,9 +241,9 @@ export const getParcels = (id: string) => {
   );
 
   // filter out pending parcels if the user is a biker
-  if (user.type === "biker") {
-    userParcels.filter((parcel) => parcel.status !== "pending");
-  }
+  // if (user.type === "biker") {
+  //   userParcels.filter((parcel) => parcel.status !== "pending");
+  // }
   return userParcels;
 };
 
@@ -252,7 +252,6 @@ export const getSenderParcels = (id: string) => {
   if (!user) {
     return null;
   }
-  // Retrieve parcels related to the user
   const userParcels = parcels.filter((parcel) => parcel.sender === id);
   return userParcels;
 };
@@ -262,9 +261,8 @@ export const getBikerParcels = (id: string) => {
   if (!user) {
     return null;
   }
-  // Retrieve parcels related to the user
   const userParcels = parcels.filter(
-    (parcel) => parcel.biker === id || parcel.status === "pending"
+    (parcel) => parcel.status === "pending" || parcel.biker === id
   );
   return userParcels;
 };
@@ -274,3 +272,16 @@ export const getPendingParcels = () => {
 
   return pending;
 };
+
+export const updateSingleParcel = (data: { status: string; id: string }) => {
+  const { status, id } = data;
+  const parcel = parcels.find((parcel) => parcel.id === id);
+
+  if (!parcel) {
+    return null;
+  }
+  parcel.status = status;
+  return parcel;
+  // return pending;
+};
+

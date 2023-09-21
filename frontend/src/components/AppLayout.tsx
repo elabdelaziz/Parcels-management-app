@@ -3,11 +3,11 @@
 import { useState } from "react";
 import LoginModal from "./LoginModal";
 
-const AppLayout = () => {
+const LandingPage = () => {
   const [loginMode, setLoginMode] = useState(false);
   return (
     <div>
-      <div className="w-full flex flex-col lg:flex-row justify-center lg:justify-around items-center h-[calc(100vh-64px)] bg-cover bg-[url('/assets/banner.jpg')]">
+      <div className="w-full flex flex-col lg:flex-row justify-center lg:justify-around items-center h-[100vh] bg-cover bg-[url('/assets/banner.jpg')]">
         <div>
           <h1 className="text-5xl mb-[1.5rem] flex text-black">
             EXPAND YOUR{" "}
@@ -30,4 +30,4 @@ const AppLayout = () => {
     </div>
   );
 };
-export default AppLayout;
+export default LandingPage;

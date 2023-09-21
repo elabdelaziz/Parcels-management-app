@@ -5,7 +5,7 @@ export interface User {
 }
 
 export interface Parcel {
-  id: number;
+  id: string;
   name: string;
   description: string;
   pickupAddress: string;
