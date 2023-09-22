@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import { Parcel } from "@/types/dataTypes";
+import Link from "next/link";
 
 export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
   const headerList = [
@@ -12,18 +13,15 @@ export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
   ];
   return (
     <>
-      <Nav />
-      <section className="flex flex-col">
-        <button
+      <section className="flex flex-col mt-16">
+        <Link
+          href="/create"
           type="button"
           className="text-white self-end bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg 
           text-lg px-5 py-2.5 mr-5 mb-2 mt-[2.5rem] dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          onClick={() => {
-            // TODO: Add new request
-          }}
         >
           Add New Request
-        </button>
+        </Link>
         <div className="overflo-x-scroll overflow-y-hidden rounded-lg border border-gray-200 shadow-md m-5">
           <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
             <thead className="bg-gray-50">
@@ -55,7 +53,6 @@ export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
                     <div className="flex gap-2">{parcel.biker}</div>
                   </td>
                   <td className="px-6 py-4">
-                    {/* bg-orange-200 */}
                     <span
                       className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold ${
                         parcel.status === "pending"

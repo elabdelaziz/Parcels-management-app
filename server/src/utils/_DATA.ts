@@ -1,6 +1,18 @@
 import config from "../config";
 import bcrypt from "bcrypt";
 
+interface Parcels {
+  id: string;
+  description: string;
+  pickupAddress: string | null;
+  dropoffAddress: string | null;
+  status: string;
+  pickupTimestamp: string | null;
+  deliveryTimestamp: string | null;
+  sender: string;
+  biker: string | null;
+}
+
 export let users = [
   {
     id: "sarahedo",
@@ -113,7 +125,7 @@ export let users = [
   },
 ];
 
-export let parcels = [
+export let parcels: Parcels[] = [
   {
     id: "8xf0y6ziyjabvozdd253nd",
     description:
@@ -221,30 +233,12 @@ export const getUser = (id: string) => {
   const user = users.find((user) => user.id === id);
 
   if (!user) {
-    return null; // Return null if the user is not found
+    return null;
   }
 
   return {
     ...user,
-    // parcels: userParcels,
   };
-};
-
-export const getParcels = (id: string) => {
-  const user = getUser(id);
-  if (!user) {
-    return null;
-  }
-  // Retrieve parcels related to the user
-  const userParcels = parcels.filter(
-    (parcel) => parcel.sender === id || parcel.biker === id
-  );
-
-  // filter out pending parcels if the user is a biker
-  // if (user.type === "biker") {
-  //   userParcels.filter((parcel) => parcel.status !== "pending");
-  // }
-  return userParcels;
 };
 
 export const getSenderParcels = (id: string) => {
@@ -273,15 +267,43 @@ export const getPendingParcels = () => {
   return pending;
 };
 
-export const updateSingleParcel = (data: { status: string; id: string }) => {
-  const { status, id } = data;
-  const parcel = parcels.find((parcel) => parcel.id === id);
+export const createParcel = (data: {
+  pickupAddress: string;
+  description: string;
+  dropoffAddress: string;
+  sender: string;
+}) => {
+  const { pickupAddress, description, dropoffAddress, sender } = data;
+  const parcel: Parcels = {
+    id: Math.random().toString(),
+    description,
+    pickupAddress,
+    dropoffAddress,
+    status: "pending",
+    pickupTimestamp: null,
+    deliveryTimestamp: null,
+    sender: sender,
+    biker: null,
+  };
 
+  parcels.push(parcel);
+};
+
+export const updateSingleParcel = (data: {
+  status: string;
+  id: string;
+  userId: string;
+}) => {
+  const { status, id, userId } = data;
+  const parcel = parcels.find((parcel) => parcel.id === id);
   if (!parcel) {
     return null;
   }
+  if (parcel.biker === null) {
+    parcel.biker = userId;
+  }
   parcel.status = status;
+
   return parcel;
-  // return pending;
 };
 

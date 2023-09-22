@@ -1,5 +1,7 @@
+import useLocalStorage from "@/hooks/useLocalStorage";
 import { useToast } from "@/hooks/useToast";
 import { Parcel } from "@/types/dataTypes";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 
 export default function ParcelCard({
@@ -9,12 +11,17 @@ export default function ParcelCard({
 }: {
   parcel: Parcel;
   options: string[];
-  handleUpdateParcel: (data: { status: string; id: string }) => void;
+  handleUpdateParcel: (data: {
+    status: string;
+    id: string;
+    userId: string;
+  }) => void;
 }) {
   const [DropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-
+  const queryClient = useQueryClient();
   const { showToast, toastComponent } = useToast();
+  const [userData] = useLocalStorage("userData", null);
 
   // listen for clicks outside of the dropdown
   useEffect(() => {
@@ -36,9 +43,9 @@ export default function ParcelCard({
   }, [DropdownOpen]);
 
   const handleClick = (status: string, id: string) => {
-    handleUpdateParcel({ status, id });
+    handleUpdateParcel({ status, id, userId: userData.id });
+    // showToast("Item moved successfully.");
     setDropdownOpen(false);
-    showToast("Item moved successfully.");
   };
 
   return (

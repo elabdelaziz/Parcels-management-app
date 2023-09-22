@@ -14,7 +14,7 @@ class BikerStore {
       );
     }
   }
-  async updateParcel(data: { status: string; id: string }) {
+  async updateParcel(data: { status: string; id: string; userId: string }) {
     try {
       const parcel = updateSingleParcel(data);
       if (!parcel) {

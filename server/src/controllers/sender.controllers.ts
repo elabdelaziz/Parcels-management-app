@@ -24,3 +24,18 @@ export const getSenderParcels = async (req: Request, res: Response) => {
     throw new Error(`unable to find pending parcels: ${err}`);
   }
 };
+export const createNewRequest = async (req: Request, res: Response) => {
+  const data = req.body;
+
+  try {
+    const parcel = await senderModel.createNewRequest(data);
+
+    return res.json({
+      status: "success",
+      data: { parcel },
+      message: "request created successfully",
+    });
+  } catch (err) {
+    throw new Error(`unable to create request: ${err}`);
+  }
+};

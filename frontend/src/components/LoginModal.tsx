@@ -4,9 +4,8 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "../styles/Input.module.css";
 import { useForm } from "react-hook-form";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { getPendingParcels, loginUser } from "@/models/userModels";
+import { loginUser } from "@/models/userModels";
 import { useRouter } from "next/navigation";
-import useGetPendingParcels from "@/hooks/queries/useGetPendingParcels";
 
 type LoginFormInput = {
   username: string;

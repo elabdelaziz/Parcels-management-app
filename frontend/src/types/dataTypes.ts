@@ -19,3 +19,10 @@ export interface ParcelGroup {
   pending: Parcel[];
   delivered: Parcel[];
 }
+
+export interface FormData {
+  pickupAddress: string;
+  description: string;
+  dropoffAddress: string;
+  sender: string;
+}

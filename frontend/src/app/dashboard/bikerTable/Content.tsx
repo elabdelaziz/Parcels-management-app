@@ -1,6 +1,8 @@
 import { Parcel } from "@/types/dataTypes";
 import ParcelCard from "./ParcelCard";
 import { updateParcel } from "@/models/bikerModels";
+import { useQueryClient } from "@tanstack/react-query";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 export default function Content({
   activeComponent,
@@ -9,10 +11,15 @@ export default function Content({
   activeComponent: string;
   parcels: Parcel[];
 }) {
+  const queryClient = useQueryClient();
+  const [userData] = useLocalStorage("userData", null);
   const dropDownList = ["pending", "picked", "delivered"];
   const handleUpdateParcel = async (data: { status: string; id: string }) => {
     try {
-      await updateParcel(data);
+      const response = await updateParcel(data);
+      if (response.status === 200) {
+        queryClient.invalidateQueries(["user-parcels", userData?.id]);
+      }
     } catch (error) {
       console.log(error);
     }

@@ -7,6 +7,6 @@ export const getBikerParcels = async (username: string) => {
 
 export const updateParcel = async (data: { status: string; id: string }) => {
   const response = await instance.patch(`/biker/parcels`, data);
-  return response.data;
+  return response;
 };
 

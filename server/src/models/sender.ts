@@ -1,4 +1,4 @@
-import { getSenderParcels } from "../utils/_DATA";
+import { createParcel, getSenderParcels } from "../utils/_DATA";
 
 class SenderStore {
   async getSenderParcels(username: string) {
@@ -11,6 +11,21 @@ class SenderStore {
     } catch (err) {
       throw new Error(
         `There's a problem retrieving parcels: ${(err as Error).message}`
+      );
+    }
+  }
+  async createNewRequest(data: {
+    pickupAddress: string;
+    description: string;
+    dropoffAddress: string;
+    sender: string;
+  }) {
+    try {
+      const parcel = createParcel(data);
+      return parcel;
+    } catch (err) {
+      throw new Error(
+        `There's a problem creating request: ${(err as Error).message}`
       );
     }
   }
