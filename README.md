@@ -3,8 +3,13 @@
 ## Installation
 
   - Make Sure you have Node.js installed
-  - Run `npm install` to install all dependencies
+  - This App doesn't contain Workspaces yet So for installing dependencies follow the steps below
+  1- cd into server directory and Run `npm install` to install server dependencies
+  2- cd into frontend directory and Run `npm install` to install frontend dependencies
+  3- cd into parcel-management root directory and Run `npm install` to install dependencies
   - Remove **.example** from **.env** file. The final result should be `.env`
+
+## Getting Started
   - To get started move to the root directory and run `npm run start` in the terminal
   - Quick Start As A Sender: **username:** "sarahedo", **password:** "password"
   - Quick Start As A Biker: **username:** "jackdoe", **password:** "password"
@@ -30,3 +35,6 @@
   - Material UI
 
 ## Upcoming Features
+  - Adding PostgreSQL Database
+  - endpoint protection on the server using Bearer Auth headers
+  - improving Bikers Dashboard
