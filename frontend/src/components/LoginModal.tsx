@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { loginUser } from "@/models/userModels";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 type LoginFormInput = {
   username: string;
@@ -21,11 +22,7 @@ const LoginModal = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [, setToken] = useLocalStorage("token", null);
-  const [userData, setUserData] = useLocalStorage("userData", null);
-  const [pendingParcels, setPendingParcels] = useLocalStorage(
-    "pendingParcels",
-    null
-  );
+  const [, setUserData] = useLocalStorage("userData", null);
 
   const router = useRouter();
 
@@ -40,6 +37,7 @@ const LoginModal = ({
       const response = await loginUser(data);
       const userToken = response.data.data.token;
       setToken(userToken);
+      Cookies.set("token", userToken);
       setUserData(response.data.data);
       router.push("/dashboard");
     } catch (error) {

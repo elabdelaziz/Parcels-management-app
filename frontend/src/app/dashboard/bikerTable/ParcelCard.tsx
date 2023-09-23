@@ -28,8 +28,6 @@ export default function ParcelCard({
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [userData] = useLocalStorage("userData", null);
 
-  console.log(pickupTime?.format("MMM-DD"));
-
   // listen for clicks outside of the dropdown
   useEffect(() => {
     function handleClickOutside(event: Event) {
@@ -64,7 +62,6 @@ export default function ParcelCard({
         deliveryTimestamp: dropTime?.format("MMM-DD"),
       });
       if (response.status === 200) {
-        console.log(response);
         queryClient.invalidateQueries(["user-parcels", userData.id]);
       }
     } catch (error) {
@@ -75,7 +72,7 @@ export default function ParcelCard({
   return (
     <div
       key={parcel.id}
-      className="relative group bg-gray-900 py-4 sm:h-fit min-h-[14rem] px-4 flex flex-col justify-between space-y-2 items-center rounded-md hover:bg-gray-900/80 hover:smooth-hover"
+      className="relative group bg-gray-900 py-4 sm:h-fit min-h-[14rem] px-4 flex flex-col justify-start space-y-2 items-center rounded-md hover:bg-gray-900/80 hover:smooth-hover"
     >
       {DropdownOpen && (
         <div className="absolute inset-0 bg-black z-20 opacity-[0.9] hover:opacity-100 transition-opacity duration-600"></div>
@@ -84,9 +81,14 @@ export default function ParcelCard({
         Sent By:{" "}
         <span className="text-white bold ml-[5px]">{parcel.sender}</span>
       </p>
-      <p className="flex !m-auto text-white/50 pt-[1.5rem]">
-        Destination: {parcel.dropoffAddress}
-      </p>
+      <div className="!mt-[2rem]">
+        <p className="flex text-white/50">
+          Pickup Address: {parcel.pickupAddress}
+        </p>
+        <p className="flex text-white/50">
+          Destination: {parcel.dropoffAddress}
+        </p>
+      </div>
       {!dateMode && parcel.biker === null && parcel.status === "pending" && (
         <Button
           sx={{ margin: "1rem 0 !important" }}

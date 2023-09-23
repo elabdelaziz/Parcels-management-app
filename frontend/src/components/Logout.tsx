@@ -1,16 +1,19 @@
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Logout({ isSender }: { isSender?: boolean }) {
+  const router = useRouter();
   const handleLogout = () => {
     localStorage.removeItem("userData");
     localStorage.removeItem("token");
+    Cookies.remove("token");
+    router.push("/");
   };
   return (
     <div className="flex items-center flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2">
-      <Link
+      <button
         onClick={handleLogout}
         className="text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
-        href="/"
         tabIndex={0}
       >
         {isSender && (
@@ -28,7 +31,7 @@ export default function Logout({ isSender }: { isSender?: boolean }) {
             clipRule="evenodd"
           />
         </svg>
-      </Link>
+      </button>
     </div>
   );
 }

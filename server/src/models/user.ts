@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import config from "../config";
-import { getBikerParcels, getPendingParcels, getUser } from "../utils/_DATA";
+import { getPendingParcels, getUser } from "../utils/_DATA";
 
 class UserStore {
   async getPendingParcels() {

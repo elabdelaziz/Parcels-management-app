@@ -1,6 +1,6 @@
 "use client";
 import "../styles/globals.css";
-import { Provider } from "@/utils/Provider";
+import { AppProvider } from "@/utils/Provider";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -14,11 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Provider>
+        <AppProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             {children}
           </LocalizationProvider>
-        </Provider>
+        </AppProvider>
       </body>
     </html>
   );

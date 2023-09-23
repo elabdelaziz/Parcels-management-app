@@ -10,8 +10,8 @@ import Nav from "@/components/Nav";
 
 export default function Dashboard() {
   const [userData] = useLocalStorage("userData", null);
-  const { data: parcels, isLoading, error } = useGetParcels(userData);
 
+  const { data: parcels, isLoading } = useGetParcels(userData);
   if (isLoading) {
     return <Loading />;
   }

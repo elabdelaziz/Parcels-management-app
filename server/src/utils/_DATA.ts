@@ -128,10 +128,9 @@ export let users = [
 export let parcels: Parcels[] = [
   {
     id: "8xf0y6ziyjabvozdd253nd",
-    description:
-      "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "address 1",
-    dropoffAddress: "address 2",
+    description: "dolor sit amet, consectetur adipiscing elit",
+    pickupAddress: "Brooklyn 123",
+    dropoffAddress: "Brooklyn 456",
     status: "delivered",
     pickupTimestamp: null,
     deliveryTimestamp: null,
@@ -140,10 +139,9 @@ export let parcels: Parcels[] = [
   },
   {
     id: "6ni6ok3ym7mf1p33lnez",
-    description:
-      "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "address 3",
-    dropoffAddress: "address 4",
+    description: "dolor sit amet, consectetur adipiscing elit",
+    pickupAddress: "Queens 123",
+    dropoffAddress: "Queens 456",
     status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
@@ -166,8 +164,8 @@ export let parcels: Parcels[] = [
     id: "8xf0y6ziyjabvozdd253dd",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "123 Main St, Cologne",
-    dropoffAddress: "456 Elm St, Cologne",
+    pickupAddress: "New York 123",
+    dropoffAddress: "New York 456",
     status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
@@ -178,8 +176,8 @@ export let parcels: Parcels[] = [
     id: "8xf0y6ziyjabvozdd253ss",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "123 Main St, Cologne",
-    dropoffAddress: "456 Elm St, Cologne",
+    pickupAddress: "Nivada 123",
+    dropoffAddress: "Nivada 456",
     status: "picked",
     pickupTimestamp: null,
     deliveryTimestamp: null,
@@ -190,8 +188,8 @@ export let parcels: Parcels[] = [
     id: "8xf0y6ziyjabvozdd253pp",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "123 Main St, Cologne",
-    dropoffAddress: "456 Elm St, Cologne",
+    pickupAddress: "Frankfurt 123",
+    dropoffAddress: "Frankfurt 456",
     status: "pending",
     pickupTimestamp: null,
     deliveryTimestamp: null,
@@ -202,8 +200,8 @@ export let parcels: Parcels[] = [
     id: "8xf0y6ziyjabvozdd253yy",
     description:
       "dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    pickupAddress: "123 Main St, Cologne",
-    dropoffAddress: "456 Elm St, Cologne",
+    pickupAddress: "munchen 123",
+    dropoffAddress: "munchen 456",
     status: "pending",
     pickupTimestamp: null,
     deliveryTimestamp: null,
