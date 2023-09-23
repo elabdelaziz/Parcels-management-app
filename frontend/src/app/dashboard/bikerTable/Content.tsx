@@ -13,16 +13,22 @@ export default function Content({
 }) {
   const queryClient = useQueryClient();
   const [userData] = useLocalStorage("userData", null);
-  const dropDownList = ["pending", "picked", "delivered"];
+  const dropDownList = ["picked", "delivered"];
   const handleUpdateParcel = async (data: { status: string; id: string }) => {
     try {
       const response = await updateParcel(data);
       if (response.status === 200) {
-        queryClient.invalidateQueries(["user-parcels", userData?.id]);
+        queryClient.invalidateQueries(["user-parcels", userData.id]);
       }
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleMoveToPicked = async (data: {
+    status: string;
+    userId: string;
+  }) => {
+    //
   };
   return (
     <div className="flex-1 px-2 sm:px-0">
@@ -31,7 +37,7 @@ export default function Content({
           {activeComponent}
         </h3>
       </div>
-      <div className="mb-10 sm:mb-0 mt-10 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="mb-10 sm:mb-0 mt-[1.5rem] grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {parcels
           .filter((parcel: Parcel) => parcel.status === activeComponent)
           .map((parcel: Parcel) => (

@@ -21,7 +21,7 @@ export const getSenderParcels = async (req: Request, res: Response) => {
       message: "parcels found successfully",
     });
   } catch (err) {
-    throw new Error(`unable to find pending parcels: ${err}`);
+    throw new Error(`unable to find parcels: ${err}`);
   }
 };
 export const createNewRequest = async (req: Request, res: Response) => {
@@ -37,5 +37,21 @@ export const createNewRequest = async (req: Request, res: Response) => {
     });
   } catch (err) {
     throw new Error(`unable to create request: ${err}`);
+  }
+};
+
+export const deleteItem = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    const parcel = await senderModel.deleteItem(id);
+
+    return res.json({
+      status: "success",
+      data: { parcel },
+      message: "item deleted successfully",
+    });
+  } catch (err) {
+    throw new Error(`unable to delete item: ${err}`);
   }
 };

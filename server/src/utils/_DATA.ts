@@ -299,10 +299,38 @@ export const updateSingleParcel = (data: {
   if (!parcel) {
     return null;
   }
+  parcel.status = status;
+
+  return parcel;
+};
+
+export const pickParcel = (data: {
+  userId: string;
+  id: string;
+  pickupTimestamp: string;
+  deliveryTimestamp: string;
+}) => {
+  const { userId, id, pickupTimestamp, deliveryTimestamp } = data;
+  const parcel = parcels.find((parcel) => parcel.id === id);
+  if (!parcel) {
+    return null;
+  }
   if (parcel.biker === null) {
     parcel.biker = userId;
   }
-  parcel.status = status;
+  parcel.status = "picked";
+  parcel.pickupTimestamp = pickupTimestamp;
+  parcel.deliveryTimestamp = deliveryTimestamp;
+
+  return parcel;
+};
+
+export const deleteParcel = (id: string) => {
+  const parcel = parcels.find((parcel) => parcel.id === id);
+  if (!parcel) {
+    return null;
+  }
+  parcels.splice(parcels.indexOf(parcel), 1);
 
   return parcel;
 };

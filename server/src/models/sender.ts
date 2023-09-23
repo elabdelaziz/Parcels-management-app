@@ -1,4 +1,4 @@
-import { createParcel, getSenderParcels } from "../utils/_DATA";
+import { createParcel, deleteParcel, getSenderParcels } from "../utils/_DATA";
 
 class SenderStore {
   async getSenderParcels(username: string) {
@@ -26,6 +26,16 @@ class SenderStore {
     } catch (err) {
       throw new Error(
         `There's a problem creating request: ${(err as Error).message}`
+      );
+    }
+  }
+  async deleteItem(id: string) {
+    try {
+      const parcel = deleteParcel(id);
+      return parcel;
+    } catch (err) {
+      throw new Error(
+        `There's a problem deleting item: ${(err as Error).message}`
       );
     }
   }

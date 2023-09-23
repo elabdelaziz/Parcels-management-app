@@ -10,3 +10,13 @@ export const updateParcel = async (data: { status: string; id: string }) => {
   return response;
 };
 
+export const pickParcel = async (data: {
+  userId: string;
+  id: string;
+  pickupTimestamp: string;
+  deliveryTimestamp: string;
+}) => {
+  const response = await instance.post(`/biker/parcels`, data);
+  return response;
+};
+
