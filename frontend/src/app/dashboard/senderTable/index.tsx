@@ -18,6 +18,9 @@ export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
   const [itemIdToBeDeleted, setItemIdToBeDeleted] = useState("");
   return (
     <>
+      <header>
+        <Nav />
+      </header>
       <section className="flex flex-col mt-16">
         <Link
           href="/create"

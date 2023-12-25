@@ -19,7 +19,7 @@ const LandingPage = () => {
         </div>
         <button
           onClick={() => setLoginMode(true)}
-          className="uppercase bg-[#8f0000] font-[500] text-white py-4 px-6 mt-[2rem] lg:mt-0 rounded w-[200px] lg:mt-0"
+          className="uppercase bg-[#8f0000] font-[500] text-white py-4 px-6 mt-[2rem] rounded w-[200px] lg:mt-0"
         >
           Login Now
         </button>

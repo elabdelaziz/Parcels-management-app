@@ -239,20 +239,31 @@ export const getUser = (id: string) => {
   };
 };
 
-export const getUserParcels = (id: string) => {
+export const getUserData = (id: string) => {
+  let parcelData = [];
+
   const user = getUser(id);
+
   if (!user) {
     return null;
   }
+
   if (user.type === "biker") {
     const bikerParcels = parcels.filter(
       (parcel) => parcel.status === "pending" || parcel.biker === id
     );
-    return bikerParcels;
+    parcelData = bikerParcels;
   } else {
     const senderParcels = parcels.filter((parcel) => parcel.sender === id);
-    return senderParcels;
+    parcelData = senderParcels;
   }
+
+  return {
+    id: user.id,
+    name: user.name,
+    type: user.type,
+    parcels: parcelData,
+  };
 };
 
 export const createParcel = (data: {

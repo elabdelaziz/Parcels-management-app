@@ -35,14 +35,14 @@ const DeleteItemConfirmation = ({
           <h2 className="text-[#ea5555] mb-[1rem] font-[700] text-[18px]">
             Delete This Package?
           </h2>
-          <p className="text-[.8125rem] text-[14px] text-[#828fa3] leading-[23px]">
+          <p className="text-[14px] text-[#828fa3] leading-[23px]">
             Are you sure you want to delete this Package? This action cannot be
             reversed.
           </p>
           <div className="flex mt-[1.5rem] !mb-0">
             <button
               onClick={handleDelete}
-              className="button mr-[1rem] text-white bg-[#ea5555] flex justify-center w-full h-auto bg-[#635FC7] p-[0.5rem_1rem] rounded-[24px] text-[.9375rem] font-700"
+              className="button mr-[1rem] text-white flex justify-center w-full h-auto bg-[#635FC7] p-[0.5rem_1rem] rounded-[24px] text-[.9375rem] font-700"
             >
               Delete
             </button>

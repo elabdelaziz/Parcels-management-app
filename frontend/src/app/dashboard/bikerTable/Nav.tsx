@@ -1,7 +1,6 @@
 import { MdPendingActions } from "react-icons/md";
 import { GoPackage } from "react-icons/go";
 import { BsFillSendCheckFill } from "react-icons/bs";
-import Link from "next/link";
 
 export default function Nav({
   activeComponent,

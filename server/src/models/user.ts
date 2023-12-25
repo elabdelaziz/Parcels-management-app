@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 import config from "../config";
-import { getUser, getUserParcels } from "../utils/_DATA";
+import { getUser, getUserData } from "../utils/_DATA";
 
 class UserStore {
   async getUserData(id: string) {
     try {
-      const userData = getUserParcels(id);
+      const userData = getUserData(id);
       if (!userData) {
         throw new Error("user not found");
       }

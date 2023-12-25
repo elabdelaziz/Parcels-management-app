@@ -1,7 +1,5 @@
-"use client";
+import DatePickerProvider from "@/components/DatePickerProvider";
 import "../styles/globals.css";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export default function RootLayout({
   children,
@@ -11,9 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          {children}
-        </LocalizationProvider>
+        <DatePickerProvider>{children}</DatePickerProvider>
       </body>
     </html>
   );

@@ -10,6 +10,7 @@ interface Props {
 
 const UserDashboard = async ({ params }: Props) => {
   const response = await fetch(`http://localhost:5000/user/${params.id}/`, {
+    cache: "no-store",
     next: {
       tags: ["all-parcels"],
     },
@@ -20,12 +21,13 @@ const UserDashboard = async ({ params }: Props) => {
     return null;
   }
 
+  console.log(data.userData.type);
   return (
     <>
       {data.userData.type === "sender" ? (
-        <SenderTable parcels={data.userData} />
+        <SenderTable parcels={data?.userData?.parcels} />
       ) : (
-        <BikerTable parcels={data.userData} />
+        <BikerTable parcels={data?.userData?.parcels} />
       )}
     </>
   );
