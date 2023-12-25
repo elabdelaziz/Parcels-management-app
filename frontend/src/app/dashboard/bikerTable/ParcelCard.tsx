@@ -13,11 +13,6 @@ export default function ParcelCard({
 }: {
   parcel: Parcel;
   options: string[];
-  handleUpdateParcel: (data: {
-    status: string;
-    id: string;
-    userId: string;
-  }) => void;
 }) {
   const [DropdownOpen, setDropdownOpen] = useState(false);
   const [dateMode, setDateMode] = useState(false);

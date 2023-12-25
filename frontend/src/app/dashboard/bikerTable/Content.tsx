@@ -1,6 +1,4 @@
-import { updateParcel } from "@/models/bikerModels";
 import { Parcel } from "@/types/dataTypes";
-import { revalidatePath } from "next/cache";
 import ParcelCard from "./ParcelCard";
 
 export default function Content({
@@ -11,22 +9,6 @@ export default function Content({
   parcels: Parcel[];
 }) {
   const dropDownList = ["picked", "delivered"];
-  const handleUpdateParcel = async (data: { status: string; id: string }) => {
-    try {
-      const response = await updateParcel(data);
-      if (response.status === 200) {
-        revalidatePath("/dashboard");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const handleMoveToPicked = async (data: {
-    status: string;
-    userId: string;
-  }) => {
-    //
-  };
   return (
     <div className="flex-1 px-2 sm:px-0">
       <div className="flex justify-between items-center">
@@ -42,7 +24,6 @@ export default function Content({
               key={parcel.id}
               parcel={parcel}
               options={dropDownList}
-              handleUpdateParcel={handleUpdateParcel}
             />
           ))}
       </div>
