@@ -7,10 +7,14 @@ interface Data {
   id: string;
   userId: string;
 }
-export const updateParcelStatus = async (formData: FormData) => {
-  const status = formData.get("status")?.toString();
-  const id = formData.get("id")?.toString();
-  const userId = formData.get("userId")?.toString();
+export const updateParcelStatus = async (formData: {
+  status: string;
+  id: string;
+  userId: string;
+}) => {
+  const status = formData.status;
+  const id = formData.id;
+  const userId = formData.userId;
 
   if (!status || !id || !userId) return;
 

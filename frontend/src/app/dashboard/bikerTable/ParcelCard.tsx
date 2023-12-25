@@ -151,7 +151,7 @@ export default function ParcelCard({
           Move To picked
         </Button>
       )}
-      <div className="absolute z-[30] !mt-0 top-[1rem] mt-0 right-[1rem]">
+      <div className="absolute z-[30] top-[1rem] mt-0 right-[1rem]">
         <div className="relative" ref={dropdownRef}>
           {parcel.status !== "pending" && (
             <button
@@ -187,13 +187,12 @@ export default function ParcelCard({
                   <button
                     type="submit"
                     disabled={option === parcel.status}
-                    // onClick={() => handleClick(option, parcel.id)}
                     onClick={() => {
-                      const formData = new FormData();
-                      formData.append("status", option);
-                      formData.append("id", parcel.id);
-                      formData.append("userId", userData.id);
-
+                      const formData = {
+                        status: option,
+                        id: parcel.id,
+                        userId: userData.id,
+                      };
                       startTransition(() => updateParcelStatus(formData));
                     }}
                     className={`block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
