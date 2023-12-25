@@ -1,17 +1,15 @@
-import useLocalStorage from "@/hooks/useLocalStorage";
-import { Parcel } from "@/types/dataTypes";
-import { useEffect, useRef, useState, useTransition } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Button from "@mui/material/Button";
-import { pickParcel } from "@/models/bikerModels";
-import { useQueryClient } from "@tanstack/react-query";
 import { updateParcelStatus } from "@/actions/serverActions";
+import useLocalStorage from "@/hooks/useLocalStorage";
+import { pickParcel } from "@/models/bikerModels";
+import { Parcel } from "@/types/dataTypes";
+import Button from "@mui/material/Button";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs, { Dayjs } from "dayjs";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 export default function ParcelCard({
   parcel,
   options,
-  handleUpdateParcel,
 }: {
   parcel: Parcel;
   options: string[];
@@ -21,7 +19,6 @@ export default function ParcelCard({
     userId: string;
   }) => void;
 }) {
-  const queryClient = useQueryClient();
   const [DropdownOpen, setDropdownOpen] = useState(false);
   const [dateMode, setDateMode] = useState(false);
   const [pickupTime, setPickupTime] = useState<Dayjs | null>(dayjs(""));
@@ -49,11 +46,6 @@ export default function ParcelCard({
     };
   }, [DropdownOpen]);
 
-  const handleClick = (status: string, id: string) => {
-    handleUpdateParcel({ status, id, userId: userData.id });
-    setDropdownOpen(false);
-  };
-
   const handleMoveToPicked = async (id: string) => {
     if (!pickupTime || !dropTime) return;
     try {
@@ -64,7 +56,7 @@ export default function ParcelCard({
         deliveryTimestamp: dropTime?.format("MMM-DD"),
       });
       if (response.status === 200) {
-        queryClient.invalidateQueries(["user-parcels", userData.id]);
+        // TODO: update state
       }
     } catch (error) {
       console.log(error);
