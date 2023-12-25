@@ -1,4 +1,4 @@
-import { onGetUserData } from "@/actions/dataSlice.actions";
+import { onGetUserData } from "@/app/actions/dataSlice.actions";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface DataState {

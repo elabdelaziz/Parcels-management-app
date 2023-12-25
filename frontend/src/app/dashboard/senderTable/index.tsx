@@ -1,3 +1,5 @@
+"use client";
+
 import DeleteItemConfirmation from "@/components/DeleteItemConfirmation";
 import Nav from "@/components/Nav";
 import { Parcel } from "@/types/dataTypes";

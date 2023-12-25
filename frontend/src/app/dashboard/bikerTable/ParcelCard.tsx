@@ -1,11 +1,12 @@
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { Parcel } from "@/types/dataTypes";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Button from "@mui/material/Button";
 import { pickParcel } from "@/models/bikerModels";
 import { useQueryClient } from "@tanstack/react-query";
+import { updateParcelStatus } from "@/actions/serverActions";
 
 export default function ParcelCard({
   parcel,
@@ -27,6 +28,7 @@ export default function ParcelCard({
   const [dropTime, setDropTime] = useState<Dayjs | null>(dayjs(""));
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [userData] = useLocalStorage("userData", null);
+  const [isPending, startTransition] = useTransition();
 
   // listen for clicks outside of the dropdown
   useEffect(() => {
@@ -183,8 +185,17 @@ export default function ParcelCard({
               {options.map((option) => (
                 <li key={option}>
                   <button
+                    type="submit"
                     disabled={option === parcel.status}
-                    onClick={() => handleClick(option, parcel.id)}
+                    // onClick={() => handleClick(option, parcel.id)}
+                    onClick={() => {
+                      const formData = new FormData();
+                      formData.append("status", option);
+                      formData.append("id", parcel.id);
+                      formData.append("userId", userData.id);
+
+                      startTransition(() => updateParcelStatus(formData));
+                    }}
                     className={`block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                       option === parcel.status ? "opacity-50" : ""
                     }`}

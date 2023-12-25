@@ -239,30 +239,20 @@ export const getUser = (id: string) => {
   };
 };
 
-export const getSenderParcels = (id: string) => {
+export const getUserParcels = (id: string) => {
   const user = getUser(id);
   if (!user) {
     return null;
   }
-  const userParcels = parcels.filter((parcel) => parcel.sender === id);
-  return userParcels;
-};
-
-export const getBikerParcels = (id: string) => {
-  const user = getUser(id);
-  if (!user) {
-    return null;
+  if (user.type === "biker") {
+    const bikerParcels = parcels.filter(
+      (parcel) => parcel.status === "pending" || parcel.biker === id
+    );
+    return bikerParcels;
+  } else {
+    const senderParcels = parcels.filter((parcel) => parcel.sender === id);
+    return senderParcels;
   }
-  const userParcels = parcels.filter(
-    (parcel) => parcel.status === "pending" || parcel.biker === id
-  );
-  return userParcels;
-};
-
-export const getPendingParcels = () => {
-  const pending = parcels.filter((parcel) => parcel.status === "pending");
-
-  return pending;
 };
 
 export const createParcel = (data: {

@@ -1,3 +1,5 @@
+"use client";
+
 import { Parcel } from "@/types/dataTypes";
 import Content from "./Content";
 import { useState } from "react";

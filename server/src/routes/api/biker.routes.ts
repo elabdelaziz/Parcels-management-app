@@ -6,6 +6,5 @@ routes
   .route("/parcels")
   .patch(controllers.updateSingleParcel)
   .post(controllers.pickParcel);
-routes.route("/:id/parcels").get(controllers.getBikerParcels);
 
 export default routes;

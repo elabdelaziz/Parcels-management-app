@@ -9,4 +9,8 @@ routes.use("/user", userRoutes);
 routes.use("/biker", bikerRoutes);
 routes.use("/sender", senderRoutes);
 
+routes.get("api/hello", (req, res) => {
+  res.json({ message: "hello" });
+});
+
 export default routes;

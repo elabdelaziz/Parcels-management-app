@@ -5,23 +5,23 @@ import UserStore from "../models/user";
 
 const userModel = new UserStore();
 
-export const getPendingParcels = async (req: Request, res: Response) => {
+export const getUserData = async (req: Request, res: Response) => {
   try {
-    const parcels = await userModel.getPendingParcels();
+    const userData = await userModel.getUserData(req.params.id);
 
-    if (!parcels) {
+    if (!userData) {
       return res.status(401).json({
         status: "error",
-        message: "parcels not found",
+        message: "userData not found",
       });
     }
     return res.json({
       status: "success",
-      data: parcels,
-      message: "parcels found successfully",
+      userData: userData,
+      message: "userData found successfully",
     });
   } catch (err) {
-    throw new Error(`unable to find pending parcels: ${err}`);
+    throw new Error(`unable to find pending userData: ${err}`);
   }
 };
 
@@ -45,8 +45,4 @@ export const auth = async (req: Request, res: Response) => {
   } catch (err) {
     throw new Error(`unable to authenticate: ${err}`);
   }
-};
-
-export const getTest = async (req: Request, res: Response) => {
-  res.json({ message: "hello" });
 };

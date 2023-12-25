@@ -37,9 +37,9 @@ const LoginModal = ({
       const response = await loginUser(data);
       const userToken = response.data.data.token;
       setToken(userToken);
-      Cookies.set("token", userToken);
+      // Cookies.set("token", userToken);
       setUserData(response.data.data);
-      router.push("/dashboard");
+      router.push(`/dashboard/${response.data.data.id}`);
     } catch (error) {
       throw new Error("cannot login user");
     }

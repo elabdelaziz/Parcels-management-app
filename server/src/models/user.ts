@@ -1,18 +1,18 @@
 import bcrypt from "bcrypt";
 import config from "../config";
-import { getPendingParcels, getUser } from "../utils/_DATA";
+import { getUser, getUserParcels } from "../utils/_DATA";
 
 class UserStore {
-  async getPendingParcels() {
+  async getUserData(id: string) {
     try {
-      const parcels = getPendingParcels();
-      if (!parcels) {
+      const userData = getUserParcels(id);
+      if (!userData) {
         throw new Error("user not found");
       }
-      return parcels;
+      return userData;
     } catch (err) {
       throw new Error(
-        `There's a problem retrieving parcels: ${(err as Error).message}`
+        `There's a problem retrieving userData: ${(err as Error).message}`
       );
     }
   }
