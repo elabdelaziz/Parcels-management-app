@@ -1,4 +1,3 @@
-import instance from "@/utils/axiosInstance";
 import BikerTable from "../bikerTable";
 import SenderTable from "../senderTable";
 
@@ -9,6 +8,7 @@ interface Props {
 }
 
 const UserDashboard = async ({ params }: Props) => {
+  // TODO: change url //
   const response = await fetch(`http://localhost:5000/user/${params.id}/`, {
     cache: "no-store",
     next: {
@@ -21,7 +21,6 @@ const UserDashboard = async ({ params }: Props) => {
     return null;
   }
 
-  console.log(data.userData.type);
   return (
     <>
       {data.userData.type === "sender" ? (

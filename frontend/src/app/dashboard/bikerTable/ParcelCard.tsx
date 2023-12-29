@@ -1,6 +1,8 @@
-import { updateParcelStatus } from "@/actions/serverActions";
+import {
+  bikerMoveToPickedAction,
+  bikerUpdateParcelStatusAction,
+} from "@/actions/serverActions";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { pickParcel } from "@/models/bikerModels";
 import { Parcel } from "@/types/dataTypes";
 import Button from "@mui/material/Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -44,15 +46,13 @@ export default function ParcelCard({
   const handleMoveToPicked = async (id: string) => {
     if (!pickupTime || !dropTime) return;
     try {
-      const response = await pickParcel({
+      const requestData = {
         userId: userData.id,
         id,
-        pickupTimestamp: pickupTime?.format("MMM-DD"),
-        deliveryTimestamp: dropTime?.format("MMM-DD"),
-      });
-      if (response.status === 200) {
-        // TODO: update state
-      }
+        pickupTimestamp: pickupTime.format("MMM-DD"),
+        deliveryTimestamp: dropTime.format("MMM-DD"),
+      };
+      await bikerMoveToPickedAction(requestData);
     } catch (error) {
       console.log(error);
     }
@@ -180,7 +180,9 @@ export default function ParcelCard({
                         id: parcel.id,
                         userId: userData.id,
                       };
-                      startTransition(() => updateParcelStatus(formData));
+                      startTransition(() =>
+                        bikerUpdateParcelStatusAction(formData)
+                      );
                     }}
                     className={`block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                       option === parcel.status ? "opacity-50" : ""
