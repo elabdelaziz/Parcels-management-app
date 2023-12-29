@@ -14,7 +14,6 @@ type LoginFormInput = {
 };
 
 const LoginModal = ({
-  loginMode,
   setLoginMode,
 }: {
   setLoginMode: Dispatch<SetStateAction<boolean>>;
@@ -23,9 +22,7 @@ const LoginModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const [, setToken] = useLocalStorage("token", null);
   const [, setUserData] = useLocalStorage("userData", null);
-
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -57,18 +54,17 @@ const LoginModal = ({
         onClick={() => setLoginMode(false)}
         className="absolute top-0 z-[3] overlay w-[100vw] h-[100vh] bg-black bg-opacity-[0.5]"
       ></div>
-      <div className="absolute top-0 flex items-center justify-center w-[100vw] h-[100vh]">
-        <div className="rounded-[10px] z-[4] flex flex-col [&>div]:mb-[1rem] [&>div>label]:mb-[0.5rem] p-[2rem] bg-white w-[100%] max-w-[30rem] max-h-[60rem] h-[fit]">
+      <div className="absolute top-0 flex items-end md:items-center justify-center w-[100vw] h-[100vh]">
+        <div className="rounded-[10px] z-[4] flex flex-col [&>div]:mb-[1rem] [&>div>label]:mb-[0.5rem] p-[2rem] bg-white w-[100%] md:max-w-[30rem] max-h-[60rem] h-[fit]">
           <form onSubmit={handleSubmit(handleFormSubmit)}>
-            <div className="mb-10">
-              <h2 className="mt-6 text-center text-3xl font-bold">
-                Login as {loginMode}
+            <div className="mb-20">
+              <h2 className="mt-6 text-center text-mainBtn text-3xl font-bold">
+                Login
               </h2>
             </div>
             <div className={styles.inputContainer}>
               <input
                 id="username"
-                placeholder="Username"
                 onFocus={(event) => (event.target.placeholder = "")}
                 className={styles.inputField}
                 type="text"
@@ -82,7 +78,6 @@ const LoginModal = ({
             <div className={styles.inputContainer}>
               <input
                 id="password"
-                placeholder="password"
                 onFocus={(event) => (event.target.placeholder = "")}
                 className={styles.inputField}
                 type="password"
@@ -100,12 +95,12 @@ const LoginModal = ({
                 </span>
               )}
               <label htmlFor="password" className={styles.inputLabel}>
-                password
+                Password
               </label>
               <span className={styles.inputHighlight}></span>
             </div>
             <button
-              className="flex justify-center w-full h-auto bg-[#635FC7] p-[0.5rem_1rem] rounded-[24px] text-white text-[.9375rem]"
+              className="flex justify-center w-full h-auto bg-mainBtn p-[0.5rem_1rem] rounded-[24px] text-white text-[.9375rem]"
               type="submit"
             >
               {isLoading ? "Loading..." : "Login"}
