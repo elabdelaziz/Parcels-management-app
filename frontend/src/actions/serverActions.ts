@@ -52,3 +52,18 @@ export const bikerMoveToPickedAction = async (requestData: {
   });
   revalidateTag("all-parcels");
 };
+
+export const senderDeleteParcel = async (id: string) => {
+  if (!id) return;
+
+  await fetch(`http://localhost:5000/sender/parcels/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    next: {
+      tags: ["all-parcels"],
+    },
+  });
+  revalidateTag("all-parcels");
+};

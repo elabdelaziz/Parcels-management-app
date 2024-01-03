@@ -1,6 +1,4 @@
-import useLocalStorage from "@/hooks/useLocalStorage";
-import { deleteItem } from "@/models/senderModels";
-import { useQueryClient } from "@tanstack/react-query";
+import { senderDeleteParcel } from "@/actions/serverActions";
 import { Dispatch, SetStateAction } from "react";
 
 type DeleteProps = {
@@ -11,14 +9,9 @@ const DeleteItemConfirmation = ({
   itemIdToBeDeleted,
   setItemIdToBeDeleted,
 }: DeleteProps) => {
-  const queryClient = useQueryClient();
-  const [userData] = useLocalStorage("userData", null);
   const handleDelete = async () => {
     try {
-      const response = await deleteItem(itemIdToBeDeleted);
-      if (response.status === 200) {
-        queryClient.invalidateQueries(["user-parcels", userData?.id]);
-      }
+      await senderDeleteParcel(itemIdToBeDeleted);
       setItemIdToBeDeleted("");
     } catch (err) {
       throw new Error("cannot delete task from database", err as ErrorOptions);

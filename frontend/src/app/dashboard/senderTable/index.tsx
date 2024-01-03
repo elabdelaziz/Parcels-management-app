@@ -11,7 +11,7 @@ export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
     "description",
     "pickup Address",
     "destination",
-    "biker",
+    "biker id",
     "status",
     "",
   ];

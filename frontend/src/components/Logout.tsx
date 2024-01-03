@@ -13,12 +13,10 @@ export default function Logout({ isSender }: { isSender?: boolean }) {
     <div className="flex items-center flex-row space-x-2 lg:space-x-0 lg:flex-col lg:space-y-2">
       <button
         onClick={handleLogout}
-        className="text-white/50 p-4 inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
+        className="text-white p-2 items-center inline-flex justify-center rounded-md hover:bg-gray-800 hover:text-white smooth-hover"
         tabIndex={0}
       >
-        {isSender && (
-          <span className="flex items-center mr-2 text-red-500">Logout</span>
-        )}
+        {isSender && <span className="flex items-center mr-2">Logout</span>}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 sm:h-6 sm:w-6"
