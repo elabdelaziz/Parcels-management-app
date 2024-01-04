@@ -1,6 +1,7 @@
 import BikerTable from "../bikerTable";
 import SenderTable from "../senderTable";
-
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 interface Props {
   params: {
     id: string;
@@ -8,7 +9,13 @@ interface Props {
 }
 
 const UserDashboard = async ({ params }: Props) => {
-  // TODO: change url //
+  const cookieStore = cookies();
+  const userToken = cookieStore.get("token");
+
+  if (!userToken) {
+    redirect("/");
+  }
+
   const response = await fetch(`http://localhost:5000/user/${params.id}/`, {
     cache: "no-store",
     next: {

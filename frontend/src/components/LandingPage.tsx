@@ -1,10 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
+import { useRouter } from "next/navigation";
 
 const LandingPage = () => {
+  const router = useRouter();
   const [loginMode, setLoginMode] = useState(false);
+  //conditional check to ensure that the code accessing localStorage runs only on the client side.
+  const userDataString =
+    typeof window !== "undefined" ? localStorage.getItem("userData") : null; // get user data synchronously
+  const userData = userDataString ? JSON.parse(userDataString) : null;
+
+  // to ensure that we render next router after the component is mounted
+  useEffect(() => {
+    if (userData?.id) {
+      router.push(`/dashboard/${userData.id}`);
+    }
+  }, [userData, router]);
+
+  if (userData?.id) {
+    return null;
+  }
+
   return (
     <div>
       <div className="w-full flex flex-col lg:flex-row justify-center lg:justify-around items-center h-[100vh] bg-cover bg-[url('/assets/banner.jpg')]">

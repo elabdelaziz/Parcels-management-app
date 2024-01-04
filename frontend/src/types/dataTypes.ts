@@ -14,6 +14,14 @@ export interface Parcel {
   status: string;
   sender: string;
 }
+
+export interface UserData {
+  id: string;
+  name: string;
+  parcels: Parcel[];
+  token: string;
+  type: string;
+}
 export interface ParcelGroup {
   picked: Parcel[];
   pending: Parcel[];
