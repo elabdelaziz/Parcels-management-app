@@ -7,11 +7,11 @@ const Nav = () => {
   const [userData] = useLocalStorage("userData", null);
   return (
     <nav className="w-full fixed bg-gray-800 top-0 h-[64px] text-white px-5 flex justify-between items-center">
-      <p>Parcels Management</p>
+      <p className="font-bold">Parcels Management</p>
       <div className="flex items-center">
         <p className="mr-5">
           Welcome{" "}
-          <span className="text-[#be8d4a] font-bold text-4">
+          <span className="text-gray-300 font-bold text-4">
             {userData?.name || ""}
           </span>
         </p>

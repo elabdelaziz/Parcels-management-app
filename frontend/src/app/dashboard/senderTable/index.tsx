@@ -64,7 +64,7 @@ export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
                     <span
                       className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold ${
                         parcel.status === "pending"
-                          ? "text-red-400  bg-red-100"
+                          ? "text-stone-600  bg-stone-300"
                           : parcel.status === "delivered"
                           ? "text-green-600  bg-green-50"
                           : "bg-blue-50 text-blue-600"
@@ -73,7 +73,7 @@ export default function SenderTable({ parcels }: { parcels: Parcel[] }) {
                       <span
                         className={`h-1.5 w-1.5 rounded-full ${
                           parcel.status === "pending"
-                            ? "bg-red-400"
+                            ? "bg-stone-400"
                             : parcel.status === "delivered"
                             ? "bg-green-600"
                             : "bg-blue-600"

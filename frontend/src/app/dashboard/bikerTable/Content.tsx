@@ -12,7 +12,7 @@ export default function Content({
   return (
     <div className="flex-1 px-2 sm:px-0">
       <div className="flex justify-between items-center">
-        <h3 className="text-3xl font-extralight text-white/50">
+        <h3 className="text-3xl first-letter:uppercase font-extralight text-white/50">
           {activeComponent}
         </h3>
       </div>

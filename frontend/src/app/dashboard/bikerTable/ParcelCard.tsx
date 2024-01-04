@@ -7,7 +7,7 @@ import { Parcel } from "@/types/dataTypes";
 import Button from "@mui/material/Button";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function ParcelCard({
   parcel,
@@ -22,7 +22,6 @@ export default function ParcelCard({
   const [dropTime, setDropTime] = useState<Dayjs | null>(dayjs(""));
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [userData] = useLocalStorage("userData", null);
-  const [isPending, startTransition] = useTransition();
 
   // listen for clicks outside of the dropdown
   useEffect(() => {
@@ -180,9 +179,7 @@ export default function ParcelCard({
                         id: parcel.id,
                         userId: userData.id,
                       };
-                      startTransition(() =>
-                        bikerUpdateParcelStatusAction(formData)
-                      );
+                      bikerUpdateParcelStatusAction(formData);
                     }}
                     className={`block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                       option === parcel.status ? "opacity-50" : ""
