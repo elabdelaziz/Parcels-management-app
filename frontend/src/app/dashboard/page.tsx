@@ -22,8 +22,6 @@ const UserDashboard = async () => {
   });
   const data = await response.json();
 
-  console.log(data);
-
   if (!data) {
     return null;
   }
