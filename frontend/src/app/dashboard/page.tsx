@@ -1,14 +1,9 @@
-import BikerTable from "../bikerTable";
-import SenderTable from "../senderTable";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-interface Props {
-  params: {
-    id: string;
-  };
-}
+import BikerTable from "./bikerTable";
+import SenderTable from "./senderTable";
 
-const UserDashboard = async ({ params }: Props) => {
+const UserDashboard = async () => {
   const cookieStore = cookies();
   const userToken = cookieStore.get("token");
 
@@ -16,13 +11,18 @@ const UserDashboard = async ({ params }: Props) => {
     redirect("/");
   }
 
-  const response = await fetch(`http://localhost:5000/user/${params.id}/`, {
+  const response = await fetch(`http://localhost:5000/user/me`, {
     cache: "no-store",
+    headers: {
+      Authorization: `Bearer ${userToken.value}`,
+    },
     next: {
       tags: ["all-parcels"],
     },
   });
   const data = await response.json();
+
+  console.log(data);
 
   if (!data) {
     return null;

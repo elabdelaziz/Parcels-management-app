@@ -4,5 +4,6 @@ import * as controllers from "../../controllers/user.controllers";
 const routes = Router();
 
 routes.route("/auth").post(controllers.auth);
-routes.route("/:id/").get(controllers.getUserData);
+routes.route("/me").get(controllers.getUserData);
+
 export default routes;

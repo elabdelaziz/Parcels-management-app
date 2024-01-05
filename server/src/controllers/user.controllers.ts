@@ -6,8 +6,18 @@ import UserStore from "../models/user";
 const userModel = new UserStore();
 
 export const getUserData = async (req: Request, res: Response) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({
+      status: "error",
+      message: "Token not provided",
+    });
+  }
   try {
-    const userData = await userModel.getUserData(req.params.id);
+    const decodedToken: any = jwt.verify(token, config.jwToken as string);
+    const userId = decodedToken.user.id;
+    const userData = await userModel.getUserData(userId);
 
     if (!userData) {
       return res.status(401).json({
@@ -27,6 +37,7 @@ export const getUserData = async (req: Request, res: Response) => {
 
 export const auth = async (req: Request, res: Response) => {
   const { username, password } = req.body;
+
   try {
     const user = await userModel.auth(username, password);
     const token = jwt.sign({ user }, config.jwToken as string);

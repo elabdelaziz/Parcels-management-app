@@ -36,7 +36,7 @@ const LoginModal = ({
       Cookies.set("token", userToken);
       setToken(userToken);
       setUserData(response.data.data);
-      router.push(`/dashboard/${response.data.data.id}`);
+      router.push("/dashboard");
     } catch (error) {
       throw new Error("cannot login user");
     }

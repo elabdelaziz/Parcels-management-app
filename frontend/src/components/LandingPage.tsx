@@ -3,23 +3,27 @@
 import { useEffect, useState } from "react";
 import LoginModal from "./LoginModal";
 import { useRouter } from "next/navigation";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const LandingPage = () => {
   const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
   const [loginMode, setLoginMode] = useState(false);
-  //conditional check to ensure that the code accessing localStorage runs only on the client side.
-  const userDataString =
-    typeof window !== "undefined" ? localStorage.getItem("userData") : null; // get user data synchronously
-  const userData = userDataString ? JSON.parse(userDataString) : null;
+  const [userData] = useLocalStorage("userData", null);
+
+  // to resolve react hydration error
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // to ensure that we render next router after the component is mounted
   useEffect(() => {
     if (userData?.id) {
-      router.push(`/dashboard/${userData.id}`);
+      router.push("/dashboard/");
     }
   }, [userData, router]);
 
-  if (userData?.id) {
+  if (!isClient || userData?.id) {
     return null;
   }
 

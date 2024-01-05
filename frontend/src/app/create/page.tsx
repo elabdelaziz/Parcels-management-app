@@ -20,7 +20,7 @@ export default function Create() {
     const res = await createNewRequest(data);
 
     if (res.status === 200) {
-      router.push(`/dashboard/${userData.id}`);
+      router.push("/dashboard");
     }
   };
   return (
