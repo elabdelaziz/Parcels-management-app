@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  web:
+    depends_on: 
+      - api
+    build: ./frontend
+    ports:
+      - 3000:3000
+
+    develop:
+      watch:
+        - path: ./frontend/package.json
+          action: rebuild
+        - path: ./frontend/package-lock.json
+          action: rebuild
+        
+        - path: ./frontend
+          target: /app
+          action: sync
+
+  api: 
+    build: ./server
+    ports: 
+      - 5000:5000
+    
+    develop:
+      watch:
+        - path: ./server/package.json
+          action: rebuild
+        - path: ./server/package-lock.json
+          action: rebuild
+        
+        - path: ./server
+          target: /app
+          action: sync
